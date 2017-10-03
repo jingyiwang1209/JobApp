@@ -17,8 +17,8 @@ export default async () => {
         }
 
         let token = await Notifications.getExponentPushTokenAsync();
-        console.log(token);
         await axios.post(PUSH_ENDPOINT, { token: { token } });
+        console.log(token);
         AsyncStorage.setItem("pushtoken", token);
     }
 };
