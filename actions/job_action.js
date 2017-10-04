@@ -11,20 +11,20 @@ const JOB_QUERY_PARAMS = {
     v:'2',
     latlong:1,
     radius:10,
-    q:'javascript'
+    // q:'javascript'
 };
 
 const ROOT_URL='http://api.indeed.com/ads/apisearch?';
 
-const buildJobUrl = (zip)=>{
-  const query = qs.stringify({...JOB_QUERY_PARAMS, l:zip})
+const buildJobUrl = (zip,text)=>{
+  const query = qs.stringify({...JOB_QUERY_PARAMS, l:zip, q:text})
   return `${ROOT_URL}${query}`;
 }
 
-export const fetchJobs = (region, cb) => async dispatch => {
+export const fetchJobs = (region, text, cb) => async dispatch => {
     try {
         let zip = await reverseGeocode(region);
-        const url = buildJobUrl(zip);
+        const url = buildJobUrl(zip,text);
         let {data} = await axios.get(url);
         dispatch({ type: FETCH_JOBS, payload: data})
         // console.log(data)

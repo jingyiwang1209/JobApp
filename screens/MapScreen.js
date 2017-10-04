@@ -3,18 +3,19 @@ import { View, Text, ActivityIndicator } from "react-native";
 import { MapView } from "expo";
 import { connect } from "react-redux";
 import * as actions from "../actions";
-import { Button, Icon } from "react-native-elements";
+import { Button, Icon, SearchBar } from "react-native-elements";
 
 class MapScreen extends Component {
     static navigationOptions = {
-        title: 'Map',
-        tabBarIcon:({ tintColor})=>(
-            <Icon name='my-location' size={30} color={tintColor}/>
+        title: "Map",
+        tabBarIcon: ({ tintColor }) => (
+            <Icon name="my-location" size={30} color={tintColor} />
         )
-    }
+    };
 
     state = {
         mapLoaded: false,
+        text:'Job title here',
         region: {
             latitude: 37.78825,
             longitude: -122.4324,
@@ -34,7 +35,7 @@ class MapScreen extends Component {
 
     // add a call back function to navigate to deck screen after the jobs are fetched
     onButtonPress() {
-        this.props.fetchJobs(this.state.region, () => {
+        this.props.fetchJobs(this.state.region,this.state.text, () => {
             this.props.navigation.navigate("deck");
         });
     }
@@ -56,6 +57,16 @@ class MapScreen extends Component {
                         this
                     )}
                 />
+
+                <View style={styles.searchBarStyle}>
+                    <SearchBar
+                        round
+                        lightTheme
+                        onChangeText={(text)=>this.setState({text})}
+                        placeholder='Type Here...'
+                    />
+                </View>
+
                 <View style={styles.buttonContainerStyle}>
                     <Button
                         large
@@ -75,7 +86,15 @@ const styles = {
         position: "absolute",
         bottom: 20,
         left: 0,
-        right: 0
+        right: 0,
+
+    },
+
+    searchBarStyle:{
+        position:"absolute",
+        top:50,
+        left:0,
+        right:0
     }
 };
 export default connect(null, actions)(MapScreen);
