@@ -10,7 +10,7 @@ class Swipe extends Component {
     static defaultProps={
         onSwipeRight:()=>{},
         onSwipeLeft:()=>{},
-        ketProp:'id'
+        keyProp:'id'
     }
 
     constructor(props) {
