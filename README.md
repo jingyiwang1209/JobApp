@@ -1,6 +1,6 @@
 # JobApp
 
-This mobile app is for users searching jobs in San Francisco and Bayarea, California.
+This mobile app is for users searching jobs in San Francisco and Bayarea, California using React Native.
 
 ## Getting Started
 
